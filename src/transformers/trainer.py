@@ -1372,6 +1372,7 @@ class Trainer:
 
                     # Optimizer step
                     optimizer_was_run = True
+                    self.callback_handler.on_before_optimizer_step(args, self.state, self.control)
                     if self.deepspeed:
                         pass  # called outside the loop
                     elif is_torch_tpu_available():
