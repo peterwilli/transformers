@@ -369,6 +369,12 @@ class CallbackHandler(TrainerCallback):
         control.should_evaluate = False
         control.should_save = False
         return self.call_event("on_step_begin", args, state, control)
+    
+    def on_before_optimizer_step(self, args: TrainingArguments, state: TrainerState, control: TrainerControl):
+        control.should_log = False
+        control.should_evaluate = False
+        control.should_save = False
+        return self.call_event("on_before_optimizer_step", args, state, control)
 
     def on_substep_end(self, args: TrainingArguments, state: TrainerState, control: TrainerControl):
         return self.call_event("on_substep_end", args, state, control)
